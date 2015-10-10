@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zip Vector</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="leaflet.css">
+</head>
+
+<body>
+    <div id="map"></div>
+    <button id="getdata">test</button>
+    <div class="data">
+        <p id="latlong">LatLong: </p>
+        <p id="zoom">Zoom: </p>
+        <p id="mapLink"></p>
+    </div>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([42.64557, -71.31022], 15);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'wingchi.nlm70k46',
+            accessToken: 'pk.eyJ1Ijoid2luZ2NoaSIsImEiOiJjaWZrZm1jbGpkbTIzc3lseDFtbjRkM2k2In0.CMs8V_QGu90x2iqq1SU-1A'
+        }).addTo(map);
+
+        $('#getdata').click(function(){
+            mapLat = (map.getCenter()).lat;
+            mapLong = (map.getCenter()).lng;
+            $('#latlong').append(map.getCenter().toString());
+            $('#zoom').append(map.getZoom());
+            $('#mapLink').append("http://www.openstreetmap.org/#map=" + map.getZoom() + "/" + mapLat + "/" + mapLong + "");
+        });
+    </script>
+</body>
+
+</html>
